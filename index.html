@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Little Princess Birthday Surprise</title>
+<style>
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:linear-gradient(135deg,#fff1f8,#eee9ff,#e9f8ff);color:#5b4666;overflow-x:hidden}
+section{min-height:100vh;padding:34px 18px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.card{width:min(900px,100%);text-align:center;background:rgba(255,255,255,.72);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.8);border-radius:30px;padding:34px 22px;box-shadow:0 20px 60px rgba(112,76,130,.16)}
+h1,h2{font-family:Georgia,serif;margin:8px 0 15px;color:#7d4f87} h1{font-size:clamp(2.2rem,8vw,4.5rem)} h2{font-size:clamp(2rem,7vw,3.4rem)}
+p{font-size:1.05rem;line-height:1.7}
+.btn{border:0;border-radius:999px;padding:14px 24px;font-size:1rem;font-weight:700;background:linear-gradient(90deg,#f58fbd,#9e8cf4);color:white;cursor:pointer;box-shadow:0 10px 25px rgba(158,140,244,.3);transition:.25s}
+.btn:hover{transform:translateY(-2px) scale(1.02)}
+.hidden{display:none!important}
+.balloon-area{height:48vh;position:relative;margin:10px auto;max-width:760px}
+.balloon{position:absolute;width:62px;height:78px;border-radius:50% 50% 48% 48%;cursor:pointer;animation:float 3s ease-in-out infinite}
+.balloon:after{content:"";position:absolute;left:50%;top:75px;width:1px;height:90px;background:#9b829f}
+.balloon:nth-child(1){left:8%;top:12%;background:#ff9fca}.balloon:nth-child(2){left:26%;top:30%;background:#a99aff}.balloon:nth-child(3){left:47%;top:8%;background:#8edcf0}.balloon:nth-child(4){left:68%;top:28%;background:#ffd17c}.balloon:nth-child(5){left:84%;top:10%;background:#ffb2b2}.balloon:nth-child(6){left:17%;top:62%;background:#c6a6f7}.balloon:nth-child(7){left:57%;top:61%;background:#ffb5dd}.balloon:nth-child(8){left:76%;top:67%;background:#9ee7d5}
+@keyframes float{50%{transform:translateY(-12px) rotate(3deg)}} .pop{animation:pop .35s forwards!important}
+@keyframes pop{to{transform:scale(1.6);opacity:0}}
+.sparkle{position:absolute;font-size:22px;animation:twinkle 2s infinite}.s1{left:8%;top:10%}.s2{right:8%;top:18%}.s3{left:15%;bottom:12%}.s4{right:15%;bottom:10%}
+@keyframes twinkle{50%{transform:scale(1.5) rotate(20deg);opacity:.45}}
+.cake-wrap{position:relative;margin:25px auto;width:260px;height:245px}
+.cake{position:absolute;bottom:15px;left:15px;width:230px;height:120px;background:linear-gradient(#ffc9df,#f59ac3);border-radius:18px 18px 28px 28px;box-shadow:0 18px 0 #d986ad}
+.cake:before{content:"";position:absolute;top:-35px;left:20px;width:190px;height:55px;background:#fff0fa;border-radius:50%;box-shadow:inset 0 -9px #ffc4df}
+.candle{position:absolute;bottom:138px;width:18px;height:62px;border-radius:8px;background:repeating-linear-gradient(135deg,#b99cff 0 8px,#fff 8px 16px);cursor:pointer}
+.candle:nth-child(1){left:65px}.candle:nth-child(2){left:121px}.candle:nth-child(3){left:177px}
+.flame{position:absolute;top:-25px;left:2px;width:14px;height:23px;background:#ffd65c;border-radius:60% 40% 60% 40%;transform:rotate(8deg);box-shadow:0 0 16px #ffca55}
+.flame.off{opacity:0}.smoke{display:none;position:absolute;top:-34px;left:6px;font-size:20px}.flame.off+.smoke{display:block;animation:smoke .7s ease forwards}
+@keyframes smoke{to{transform:translateY(-25px);opacity:0}}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}.photo{height:220px;border-radius:22px;background:linear-gradient(135deg,#ffd7ea,#d9d0ff);display:flex;align-items:center;justify-content:center;font-size:4rem;box-shadow:0 12px 25px rgba(110,75,130,.13);overflow:hidden}.photo img{width:100%;height:100%;object-fit:cover}
+.wish{margin:25px auto 0;max-width:720px;background:#fff9fd;border-radius:25px;padding:25px;box-shadow:inset 0 0 0 2px #f5d8eb}
+.gift{width:180px;height:145px;margin:35px auto;position:relative;cursor:pointer;transition:.3s}.gift:hover{transform:scale(1.04)}
+.box{position:absolute;bottom:0;width:180px;height:115px;background:#ff9cc8;border-radius:8px;box-shadow:0 15px 30px #c995b5}.lid{position:absolute;top:0;left:-8px;width:196px;height:43px;background:#ffb2d5;border-radius:9px;z-index:3;transform-origin:12% 100%;transition:.8s}.ribbonV{position:absolute;left:75px;bottom:0;width:30px;height:115px;background:#fff0a8;z-index:2}.ribbonH{position:absolute;left:0;top:38px;width:180px;height:25px;background:#fff0a8;z-index:4}
+.gift.open .lid{transform:rotate(-28deg) translate(-18px,-20px)} .surprise{opacity:0;transform:translateY(15px);transition:.7s}.gift.open~.surprise{opacity:1;transform:none}
+.confetti{position:fixed;top:-20px;width:9px;height:16px;z-index:20;animation:fall 2.8s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:.9}}
+.note{font-size:.9rem;opacity:.7;margin-top:12px}
+@media(max-width:650px){.gallery{grid-template-columns:1fr}.photo{height:260px}.balloon{width:52px;height:67px}.cake-wrap{transform:scale(.88)}}
+</style>
+</head>
+<body>
+
+<section id="welcome">
+<div class="card">
+<div style="font-size:3rem">🎀✨🎈</div>
+<h1>A Little Birthday Surprise Awaits!</h1>
+<p>Pop the balloons to begin a magical birthday journey. 💕</p>
+<div class="balloon-area" id="balloons">
+<span class="sparkle s1">✦</span><span class="sparkle s2">✧</span><span class="sparkle s3">✦</span><span class="sparkle s4">✧</span>
+<div class="balloon" onclick="popBalloon(this)"></div><div class="balloon" onclick="popBalloon(this)"></div>
+<div class="balloon" onclick="popBalloon(this)"></div><div class="balloon" onclick="popBalloon(this)"></div>
+<div class="balloon" onclick="popBalloon(this)"></div><div class="balloon" onclick="popBalloon(this)"></div>
+<div class="balloon" onclick="popBalloon(this)"></div><div class="balloon" onclick="popBalloon(this)"></div>
+</div>
+<button class="btn" onclick="popAll()">POP THE BALLOONS 🎈</button>
+</div></section>
+
+<section id="cakeSection" class="hidden">
+<div class="card">
+<div style="font-size:2.5rem">🧚‍♀️🌸🦋</div>
+<h2>Make a Wish! ✨</h2>
+<p>Touch each candle flame to blow it out. 🕯️💖</p>
+<div class="cake-wrap">
+<div class="candle" onclick="candleOff(this)"><span class="flame"></span><span class="smoke">☁️</span></div>
+<div class="candle" onclick="candleOff(this)"><span class="flame"></span><span class="smoke">☁️</span></div>
+<div class="candle" onclick="candleOff(this)"><span class="flame"></span><span class="smoke">☁️</span></div>
+<div class="cake"></div>
+</div>
+<div id="wishMade" class="hidden"><h3>Wish Made! 💖✨</h3><button class="btn" onclick="showNext('photos')">Continue 🌸</button></div>
+</div></section>
+
+<section id="photos" class="hidden">
+<div class="card">
+<h2>Sweet Little Memories 💕</h2>
+<p>Six little moments, wrapped in lots of love. 📸✨</p>
+<div class="gallery">
+<div class="photo"><img src="photo1.jpg" alt="Mustabshira memory 1"></div>
+<div class="photo"><img src="photo2.jpg" alt="Mustabshira memory 2"></div>
+<div class="photo"><img src="photo3.jpg" alt="Mustabshira memory 3"></div>
+<div class="photo"><img src="photo4.jpg" alt="Mustabshira memory 4"></div>
+<div class="photo"><img src="photo5.jpg" alt="Mustabshira memory 5"></div>
+<div class="photo"><img src="photo6.jpg" alt="Mustabshira memory 6"></div>
+</div>
+<button class="btn" onclick="showNext('wishes')">Birthday Wishes 💌</button>
+</div></section>
+
+<section id="wishes" class="hidden">
+<div class="card">
+<div style="font-size:3rem">💌🌷👑</div>
+<h2>For Our Little Princess</h2>
+<div class="wish">
+<p><b>Happy 3rd Birthday, Little Princess! 🎂👑</b></p>
+<p>May your little world always be filled with happiness, love, laughter and beautiful dreams. May Allah bless you with a long, healthy and beautiful life, protect you always, and fill every year ahead with countless blessings and joy. ✨</p>
+<p>Keep smiling, keep shining, and always stay as sweet and precious as you are. 💖</p>
+<p><b>Happy Birthday, our little fairy! 🧚‍♀️🎀✨</b></p>
+</div>
+<button class="btn" onclick="showNext('giftSection')">One Last Surprise 🎁</button>
+</div></section>
+
+<section id="giftSection" class="hidden">
+<div class="card">
+<div style="font-size:2.5rem">✨🎀✨</div>
+<h2>One Last Surprise… 🎁</h2>
+<p>Tap the gift to open it!</p>
+<div class="gift" id="gift" onclick="openGift()">
+<div class="lid"></div><div class="box"></div><div class="ribbonV"></div><div class="ribbonH"></div>
+</div>
+<div class="surprise">
+<h2 style="font-size:2rem">You Are the Sweetest Little Blessing! 💖</h2>
+<p>May your smile always shine brighter than the stars. ✨<br><b>Happy 3rd Birthday, Princess! 👑🎂🧚‍♀️</b></p>
+<div style="font-size:2rem">🎉💗🌸🦋🎈🎂</div>
+</div>
+</div></section>
+
+<script>
+let popped=0, candles=0;
+function popBalloon(el){if(el.classList.contains('pop'))return;el.classList.add('pop');popped++;confetti(7);if(popped===8)setTimeout(()=>showNext('cakeSection'),700)}
+function popAll(){document.querySelectorAll('.balloon').forEach((b,i)=>setTimeout(()=>popBalloon(b),i*100))}
+function candleOff(el){let flame=el.querySelector('.flame');if(flame.classList.contains('off'))return;flame.classList.add('off');candles++;if(candles===3){setTimeout(()=>{document.getElementById('wishMade').classList.remove('hidden');confetti(18)},700)}}
+function showNext(id){document.getElementById(id).classList.remove('hidden');setTimeout(()=>document.getElementById(id).scrollIntoView({behavior:'smooth'}),50)}
+function openGift(){let g=document.getElementById('gift');if(g.classList.contains('open'))return;g.classList.add('open');confetti(45)}
+function confetti(n){for(let i=0;i<n;i++){let c=document.createElement('div');c.className='confetti';c.style.left=Math.random()*100+'vw';c.style.animationDelay=(Math.random()*.7)+'s';c.style.background=['#ff9cc8','#9e8cf4','#8edcf0','#ffd17c','#9ee7d5'][Math.floor(Math.random()*5)];document.body.appendChild(c);setTimeout(()=>c.remove(),3500)}}
+</script>
+</body>
+</html>
